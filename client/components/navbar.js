@@ -9,17 +9,30 @@ import axios from 'axios'
 class Navbar extends Component {
   constructor(props) {
     super(props)
-    this.state = {value: 0}
+    this.state = {
+      value: 0,
+      format: 'ISBN'
+    }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+  }
+  async handleSelect(event) {
+    // set local state format to selection
+    await this.setState({format: event.target.value})
   }
   handleChange(event) {
     this.setState({value: event.target.value})
   }
 
   handleSubmit(event) {
-    const data = axios.get(`/api/books`)
+    const body = {
+      format: this.state.format,
+      value: this.state.value
+    }
+
+    const data = axios.post(`/api/books/`, body)
     console.log(data)
     alert('A name was submitted: ' + this.state.value)
     event.preventDefault()
@@ -29,22 +42,23 @@ class Navbar extends Component {
     return (
       <div>
         <h1>Amex Challende</h1>
-        <nav>
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                />
-              </label>
-              <input type="submit" value="Submit" />
-            </form>
-          </div>
-        </nav>
-        <hr />
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <select onChange={this.handleSelect} value={this.state.format}>
+                <option>ISBN</option>
+                <option>LCCN</option>
+                <option>OCLC</option>
+                <option>OLID</option>
+              </select>
+            </label>
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </form>
+        </div>
       </div>
     )
   }
