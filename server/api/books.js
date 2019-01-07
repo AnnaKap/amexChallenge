@@ -4,11 +4,17 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const book = await axios.get(
-      'https://openlibrary.org/api/books?bibkeys=ISBN:0201558025,LCCN:93005405&format=json'
+    const {data} = await axios.get(
+      //format=json (to get json)
+      //jscmd=data (to get title/subtitle of book)
+      'https://openlibrary.org/api/books?bibkeys=ISBN:0201558025&format=json&jscmd=data'
     )
-    console.log(book.data)
-    res.json(book.data)
+    //accessing authors of a book
+    data[Object.keys(data)[0]].authors.forEach(author => {
+      console.log(author.name)
+    })
+    // console.log("data",data[Object.keys(data)[0]].authors)
+    res.json(data)
   } catch (err) {
     next(err)
   }
