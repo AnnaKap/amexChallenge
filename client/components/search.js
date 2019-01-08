@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getBook} from '../store/books'
-import {Books} from '.'
+import {Books} from '../components'
 
 // import PropTypes from 'prop-types'
 // import {connect} from 'react-redux'
@@ -29,11 +29,8 @@ class Search extends Component {
     const body = this.state
     await this.props.getBook(body)
   }
-  //http://covers.openlibrary.org/b/id/[cover_i]-M.jpg
+
   render() {
-    if (this.props.books.docs) {
-      console.log('book', this.props.books)
-    }
     return (
       <div>
         <h1>Amex Challenge</h1>
@@ -62,6 +59,10 @@ class Search extends Component {
             </button>
           </form>
         </div>
+        {this.props.books.docs &&
+          this.props.books.docs.map((book, idx) => (
+            <Books book={book} key={idx} idx={idx} />
+          ))}
       </div>
     )
   }

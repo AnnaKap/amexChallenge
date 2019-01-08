@@ -1,30 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-class Books extends Component {
-  constructor(props) {
-    super(props)
+const Books = props => {
+  console.log('book props', props)
+  let imgUrl
+  props.book.cover_i
+    ? (imgUrl = `http://covers.openlibrary.org/b/id/${
+        props.book.cover_i
+      }-M.jpg`)
+    : (imgUrl = 'book.jpg')
+  return (
+    <div className="aBook" idx={props.idx}>
+      <div>{props.book.title}</div>
+      <div>{props.book.author_name[0]}</div>
+      <img src={imgUrl} />
+    </div>
+  )
+}
 
-    console.log('books props', props)
-    const booksArr = props.books.docs
-  }
-  render() {
-    return (
-      <div>
-        {this.props.books.docs &&
-          this.props.books.docs.map((book, idx) => (
-            <div className="aBook" key={idx}>
-              <div>{book.title}</div>
-              <div>{book.author_name[0]}</div>
-            </div>
-          ))}
-      </div>
-    )
-  }
-}
-const mapStateToProps = state => {
-  return {
-    books: state.books
-  }
-}
-export default connect(mapStateToProps)(Books)
+export default Books

@@ -21,7 +21,6 @@ const gotBook = book => ({type: GOT_BOOK, book})
 export const getBook = body => async dispatch => {
   try {
     const {data} = await axios.post(`/api/books/`, body)
-    console.log('books', data)
     return dispatch(gotBook(data))
   } catch (err) {
     console.error(err)
