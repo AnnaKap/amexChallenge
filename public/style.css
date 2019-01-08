@@ -1,21 +1,17 @@
 body {
   font-family: sans-serif;
 }
-
-a {
-  text-decoration: none;
+.searchForm {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
-
-label {
-  display: block;
+.inputs {
+  margin: 20px;
 }
-
-nav a {
-  display: inline-block;
-  margin: 1em;
+.inputs label {
+  margin-right: 5px;
 }
-
-form div {
-  margin: 1em;
-  display: inline-block;
+.button {
+  height: 20px;
 }
