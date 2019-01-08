@@ -12,12 +12,15 @@ class Search extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      results: 0,
+      books: [],
       title: '',
       author: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFilter = this.handleFilter.bind(this)
   }
 
   handleChange(event) {
@@ -26,8 +29,29 @@ class Search extends Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const body = this.state
+    const body = {title: this.state.title, author: this.state.author}
     await this.props.getBook(body)
+    this.setState({
+      books: this.props.books.docs,
+      results: this.props.books.numFound
+    })
+  }
+
+  handleFilter(event) {
+    console.log(event.target.value)
+    if (event.target.value === '') {
+      this.setState({
+        books: this.props.books.docs
+      })
+    } else {
+      console.log('yerr', event.target)
+      let newBooks = this.props.books.docs.filter(book => {
+        return book.title.includes(event.target.value)
+      })
+      this.setState({
+        books: newBooks
+      })
+    }
   }
 
   render() {
@@ -58,9 +82,13 @@ class Search extends Component {
               Search!
             </button>
           </form>
+          <div className="filter">
+            <label>filter titles</label>
+            <input type="text" name="filter" onChange={this.handleFilter} />
+          </div>
         </div>
-        {this.props.books.docs &&
-          this.props.books.docs.map((book, idx) => (
+        {this.state.books &&
+          this.state.books.map((book, idx) => (
             <Books book={book} key={idx} idx={idx} />
           ))}
       </div>

@@ -17,12 +17,8 @@ router.post('/', async (req, res, next) => {
         url = url.concat(`${key}=${value}`)
         currIdx++
       }
-      console.log('key', key, 'value', req.body[key])
-      console.log('url', url)
     })
-
     const {data} = await axios.get(url)
-    console.log(data)
     res.send(data)
   } catch (err) {
     next(err)
