@@ -21,6 +21,7 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleFilter = this.handleFilter.bind(this)
+    this.handleSort = this.handleSort.bind(this)
   }
 
   handleChange(event) {
@@ -38,20 +39,49 @@ class Search extends Component {
   }
 
   handleFilter(event) {
-    console.log(event.target.value)
     if (event.target.value === '') {
       this.setState({
         books: this.props.books.docs
       })
     } else {
-      console.log('yerr', event.target)
       let newBooks = this.props.books.docs.filter(book => {
-        return book.title.includes(event.target.value)
+        return book.title
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase())
       })
       this.setState({
         books: newBooks
       })
     }
+  }
+  handleSort(event) {
+    //sorting alphabetically based on option chosen by user
+    //(A-Z or Z-A)
+    let sortedBooks = [...this.state.books]
+    if (event.target.value === 'A-Z') {
+      sortedBooks.sort(function(a, b) {
+        if (a.title < b.title) {
+          return -1
+        }
+        if (a.title > b.title) {
+          return 1
+        }
+        return 0
+      })
+    } else {
+      sortedBooks.sort(function(a, b) {
+        if (a.title > b.title) {
+          return -1
+        }
+        if (a.title < b.title) {
+          return 1
+        }
+        return 0
+      })
+    }
+    this.setState({
+      books: sortedBooks
+    })
   }
 
   render() {
@@ -85,6 +115,12 @@ class Search extends Component {
           <div className="filter">
             <label>filter titles</label>
             <input type="text" name="filter" onChange={this.handleFilter} />
+          </div>
+          <div className="sort">
+            <select onChange={this.handleSort}>
+              <option>A-Z</option>
+              <option>Z-A</option>
+            </select>
           </div>
         </div>
         {this.state.books &&
