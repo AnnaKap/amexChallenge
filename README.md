@@ -15,4 +15,4 @@ This app allows a user to search for a book using the Open Library API
 
 ### to run tests
 
-1.  npm test
+1.  npm run test
