@@ -28,10 +28,11 @@ body {
   display: flex;
   flex-direction: column;
   width: 70%;
+
   border: 1px solid blue;
   margin: 5%;
   padding: 2%;
-  max-height: 40vh;
+  max-height: 50vh;
   color: blue;
 }
 .aBook:hover {

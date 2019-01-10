@@ -35,11 +35,13 @@ class Books extends Component {
     }
   }
   render() {
-    console.log('book', this.props.book)
     return (
       <div className="aBook" id={this.props.id} onClick={this.clickHandler}>
         <div>{this.props.book.title}</div>
-        <div>{this.props.book.author_name[0]}</div>
+        <div>
+          By{' '}
+          {this.props.book.author_name ? this.props.book.author_name[0] : 'n/a'}
+        </div>
         {this.props.book.cover_i ? (
           <img
             className="details"
