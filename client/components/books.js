@@ -8,17 +8,20 @@ class Books extends Component {
 
     this.clickHandler = this.clickHandler.bind(this)
   }
+  // eslint-disable-next-line complexity
   clickHandler(event) {
     event.preventDefault()
     let id = event.target.parentNode.id
 
     //close all details of books
     let close = document.getElementsByClassName('details')
+
     for (let i = 0; i < close.length; i++) {
       if (close[i].parentNode.id !== id) {
         close[i].style.display = 'none'
       }
     }
+
     if (id) {
       let details = document
         .getElementById(id)

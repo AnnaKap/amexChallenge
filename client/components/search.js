@@ -84,8 +84,7 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <h1>Amex Challenge</h1>
-        <div>
+        <div className="bar">
           <form onSubmit={this.handleSubmit} className="searchForm">
             <div className="inputs">
               <label>Author</label>
@@ -109,20 +108,23 @@ class Search extends Component {
               Search!
             </button>
           </form>
-
-          <div className="filter">
-            <label>filter titles</label>
-            <input type="text" name="filter" onChange={this.handleFilter} />
+          <div className="showing">
+            Currently showing {this.state.results} books!
           </div>
+          <div className="resultsBar">
+            <div className="sort">
+              <select onChange={this.handleSort}>
+                <option>A-Z</option>
+                <option>Z-A</option>
+              </select>
+            </div>
 
-          <div className="sort">
-            <select onChange={this.handleSort}>
-              <option>A-Z</option>
-              <option>Z-A</option>
-            </select>
+            <div className="filter inputs">
+              <label>Filter Titles</label>
+              <input type="text" name="filter" onChange={this.handleFilter} />
+            </div>
           </div>
         </div>
-        <div>Currently showing {this.state.results} books!</div>
         <div className="booksContainer">
           {this.state.books &&
             this.state.books.map((book, idx) => (
