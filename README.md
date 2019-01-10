@@ -6,7 +6,7 @@ This app allows a user to search for a book using the Open Library API
 
 ### to visit the site of deployment
 
-1.  click here (deployed with heroku)
+1.  click [here](https://anna-amex-challenge.herokuapp.com/) (deployed with heroku)
 
 ### to run locally
 
