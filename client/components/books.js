@@ -39,7 +39,7 @@ class Books extends Component {
       <div className="aBook" id={this.props.id} onClick={this.clickHandler}>
         <div>{this.props.book.title}</div>
         <div>
-          By{' '}
+          By
           {this.props.book.author_name ? this.props.book.author_name[0] : 'n/a'}
         </div>
         {this.props.book.cover_i ? (
