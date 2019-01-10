@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {selectedBook} from '../store/books'
 
 class Books extends Component {
   constructor(props) {
@@ -68,9 +66,4 @@ class Books extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    selectedBook: index => dispatch(selectedBook(index))
-  }
-}
-export default connect(null, mapDispatchToProps)(Books)
+export default Books
