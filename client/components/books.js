@@ -21,6 +21,7 @@ class Books extends Component {
     }
 
     if (id) {
+      //get the elements that are hidden (details)
       let details = document
         .getElementById(id)
         .getElementsByClassName('details')

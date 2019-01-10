@@ -4,7 +4,6 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GOT_BOOK = 'GOT_BOOK'
-const SELECT_BOOK = 'SELECT_BOOK'
 /**
  * INITIAL STATE
  */
@@ -20,6 +19,7 @@ const gotBook = book => ({type: GOT_BOOK, book})
  */
 export const getBook = body => async dispatch => {
   try {
+    // body consists of title and author keys/value pairs
     const {data} = await axios.post(`/api/books/`, body)
     return dispatch(gotBook(data))
   } catch (err) {

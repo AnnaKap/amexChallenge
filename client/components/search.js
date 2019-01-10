@@ -23,6 +23,8 @@ class Search extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  //submits title and/or author inputs by user
+  //data sent to redux thunk and updates redux store
   async handleSubmit(event) {
     event.preventDefault()
     const body = {title: this.state.title, author: this.state.author}
@@ -33,6 +35,7 @@ class Search extends Component {
     })
   }
 
+  // filter function based on user input
   handleFilter(event) {
     if (event.target.value === '') {
       this.setState({
