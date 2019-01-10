@@ -39,7 +39,7 @@ class Books extends Component {
         <div>
           By
           {this.props.book.author_name
-            ? this.props.book.author_name[0]
+            ? ` ${this.props.book.author_name[0]}`
             : ' n/a'}
         </div>
         {this.props.book.cover_i ? (
