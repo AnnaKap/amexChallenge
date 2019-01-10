@@ -2,8 +2,7 @@ import React from 'react'
 
 import {Search} from './components'
 
-const App = props => {
-  console.log('app props', props)
+const App = () => {
   return (
     <div>
       <Search />

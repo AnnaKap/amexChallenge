@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {selectedBook} from '../store/books'
-import {Link} from 'react-router-dom'
-import {withRouter} from 'react-router-dom'
 
 class Books extends Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class Books extends Component {
   clickHandler(event) {
     event.preventDefault()
     let id = event.target.parentNode.id
+
     //close all details of books
     let close = document.getElementsByClassName('details')
     for (let i = 0; i < close.length; i++) {
@@ -20,13 +19,16 @@ class Books extends Component {
         close[i].style.display = 'none'
       }
     }
-
-    let details = document.getElementById(id).getElementsByClassName('details')
-    //open the details of newly clicked book
-    for (let i = 0; i < details.length; i++) {
-      details[i].style.display === '' || details[i].style.display === 'none'
-        ? (details[i].style.display = 'inline')
-        : (details[i].style.display = 'none')
+    if (id) {
+      let details = document
+        .getElementById(id)
+        .getElementsByClassName('details')
+      //open the details of newly clicked book
+      for (let i = 0; i < details.length; i++) {
+        details[i].style.display === '' || details[i].style.display === 'none'
+          ? (details[i].style.display = 'inline')
+          : (details[i].style.display = 'none')
+      }
     }
   }
   render() {
@@ -46,11 +48,15 @@ class Books extends Component {
           <img className="details" src="book.jpg" />
         )}
         <div className="details">
-          Publisher: {this.props.book.publisher[0]}
+          Publisher:{' '}
+          {this.props.book.publisher ? this.props.book.publisher[0] : 'n/a'}
           <br />
-          Published Date: {this.props.book.publish_date[0]}
+          Published Date:{' '}
+          {this.props.book.publish_date
+            ? this.props.book.publish_date[0]
+            : 'n/a'}
           <br />
-          ISBN: {this.props.book.isbn[0]}
+          ISBN: {this.props.book.isbn ? this.props.book.isbn[0] : 'n/a'}
         </div>
       </div>
     )

@@ -3,15 +3,9 @@ import {connect} from 'react-redux'
 import {getBook} from '../store/books'
 import {Books} from '../components'
 
-// import PropTypes from 'prop-types'
-// import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
-// import {logout} from '../store'
-
 class Search extends Component {
   constructor(props) {
     super(props)
-    console.log('PROPS', props)
     this.state = {
       results: 0,
       books: [],
@@ -42,7 +36,8 @@ class Search extends Component {
   handleFilter(event) {
     if (event.target.value === '') {
       this.setState({
-        books: this.props.books.docs
+        books: this.props.books.docs,
+        results: this.props.books.numFound
       })
     } else {
       let newBooks = this.props.books.docs.filter(book => {
@@ -51,7 +46,8 @@ class Search extends Component {
           .includes(event.target.value.toLowerCase())
       })
       this.setState({
-        books: newBooks
+        books: newBooks,
+        results: newBooks.length
       })
     }
   }
@@ -113,10 +109,12 @@ class Search extends Component {
               Search!
             </button>
           </form>
+
           <div className="filter">
             <label>filter titles</label>
             <input type="text" name="filter" onChange={this.handleFilter} />
           </div>
+
           <div className="sort">
             <select onChange={this.handleSort}>
               <option>A-Z</option>
@@ -124,10 +122,13 @@ class Search extends Component {
             </select>
           </div>
         </div>
-        {this.state.books &&
-          this.state.books.map((book, idx) => (
-            <Books book={book} key={idx} id={idx} />
-          ))}
+        <div>Currently showing {this.state.results} books!</div>
+        <div className="booksContainer">
+          {this.state.books &&
+            this.state.books.map((book, idx) => (
+              <Books book={book} key={idx} id={idx} />
+            ))}
+        </div>
       </div>
     )
   }
