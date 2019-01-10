@@ -4,7 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GOT_BOOK = 'GOT_BOOK'
-
+const SELECT_BOOK = 'SELECT_BOOK'
 /**
  * INITIAL STATE
  */

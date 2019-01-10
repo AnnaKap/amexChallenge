@@ -1,13 +1,12 @@
 import React from 'react'
 
 import {Search} from './components'
-import Routes from './routes'
 
-const App = () => {
+const App = props => {
+  console.log('app props', props)
   return (
     <div>
       <Search />
-      {/* <Routes /> */}
     </div>
   )
 }

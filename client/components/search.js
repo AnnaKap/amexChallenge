@@ -11,6 +11,7 @@ import {Books} from '../components'
 class Search extends Component {
   constructor(props) {
     super(props)
+    console.log('PROPS', props)
     this.state = {
       results: 0,
       books: [],
@@ -125,7 +126,7 @@ class Search extends Component {
         </div>
         {this.state.books &&
           this.state.books.map((book, idx) => (
-            <Books book={book} key={idx} idx={idx} />
+            <Books book={book} key={idx} id={idx} />
           ))}
       </div>
     )

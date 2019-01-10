@@ -5,3 +5,4 @@
  */
 export {default as Search} from './search'
 export {default as Books} from './books'
+export {default as SingleBook} from './singleBook'
